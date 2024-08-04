@@ -70,7 +70,7 @@ const ChapterIdPage = async({params}:{params:{courseId:string,chapterId:string}}
             <h2 className="text-2xl font-semibold mb-2">
               {chapter.title}
             </h2>
-            {purchase ? (
+            {course ? (
               <CourseProgressButton
                 chapterId={params.chapterId}
                 courseId={params.courseId}
@@ -78,10 +78,10 @@ const ChapterIdPage = async({params}:{params:{courseId:string,chapterId:string}}
                 isCompleted={!!userProgress?.isCompleted}
               />
             ) : (
-              <CourseEnrollButton
-                courseId={params.courseId}
-                price={course.price!}
-              />
+              <p>
+                
+              </p>
+              
             )}
           </div>
           <Separator />

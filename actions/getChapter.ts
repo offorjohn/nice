@@ -52,6 +52,11 @@ export const getChapter = async ( {userId,courseId,chapterId}:GetChapterProps) =
           }
 
           if (chapter.isFree || purchase) {
+            attachments = await db.attachment.findMany({
+              where: {
+                courseId: courseId
+              }
+            })
             muxData = await db.muxData.findUnique({
               where: {
                 chapterId: chapterId,

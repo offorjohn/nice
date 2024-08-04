@@ -22,7 +22,7 @@ export const CourseEnrollButton = ({
       try {
         setIsLoading(true);
   
-        const response = await axios.post(`/api/courses/${courseId}/checkout`)
+        const response = await axios.post(`/api/courses/${courseId}/enroll`)
   
         window.location.assign(response.data.url);
       } catch {
