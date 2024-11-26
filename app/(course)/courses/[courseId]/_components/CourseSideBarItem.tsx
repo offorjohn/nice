@@ -1,10 +1,6 @@
 "use client";
 
-import { inter } from "@/app/layout";
-import { ConfettiProvider } from "@/components/providers/ConfettiProvider";
-import { ToasterProvider } from "@/components/providers/toaster-provider";
 import { cn } from "@/lib/utils";
-import { ClerkProvider } from "@clerk/nextjs";
 import { CheckCircle, Lock, PlayCircle } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -63,23 +59,5 @@ interface CourseSidebarItemProps {
         isCompleted && "border-emerald-700"
       )} />
     </button>
-  )
-}
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <Theme appearance="dark" />
-          <ConfettiProvider />
-          <ToasterProvider />
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
   )
 }
