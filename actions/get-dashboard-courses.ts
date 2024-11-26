@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { Category, Chapter, Course } from "@prisma/client";
 import { getProgress } from "./get-progress";
+import { redirect } from "next/navigation";
 
 type CourseWithProgressWithCategory = Course & {
   category: Category;
@@ -17,11 +18,11 @@ export const getDashboardCourses = async (
 ): Promise<DashboardCourses> => {
   try {
     if (!userId) {
-      // Return generic public data when no userId is provided
-      return {
-        completedCourses: [], // You can fetch public courses here if required
-        coursesInProgress: [], // You can fetch public courses here if required
-      };
+      // Redirect to the sign-in page
+      redirect("https://fancy-cat-63.accounts.dev/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2Fsearch");
+
+      // The `redirect` function will terminate execution, so the following code won't be reached.
+     
     }
 
     const purchasedCourses = await db.purchase.findMany({
