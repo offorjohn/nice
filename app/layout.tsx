@@ -23,7 +23,7 @@ export default function RootLayout({
       <ClerkProvider>
         <html lang="en">
           <body className={inter.className}>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <ThemeProvider attribute="class">
           <Theme appearance="dark">
             <ConfettiProvider/>
             <ToasterProvider/>
