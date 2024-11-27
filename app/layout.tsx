@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider afterSignUpUrl="/">
+      <ClerkProvider>
         <html lang="en">
           <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
