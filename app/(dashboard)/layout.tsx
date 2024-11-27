@@ -1,19 +1,16 @@
-import { Navbar } from "./_components/Navbar"
-import { SideBar } from "./_components/SideBar"
+import { Navbar } from "./_components/Navbar";
 
-const DashboardLayout = ({ children }:{children:React.ReactNode})=>{
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="h-full">
-            <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50 ">
+            <div className="h-[80px] fixed inset-x-0 top-0 w-full z-50">
                 <Navbar />
             </div>
-            <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
-                <SideBar />
-            </div>
-            <main className="md:pl-56 pt-[80px] h-full">
+            <main className="pt-[80px] h-full">
                 {children}
             </main>
         </div>
-    )
-}
-export default DashboardLayout
+    );
+};
+
+export default DashboardLayout;

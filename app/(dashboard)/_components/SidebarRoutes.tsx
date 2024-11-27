@@ -1,18 +1,18 @@
 "use client";
-import { BarChart, Compass, Layout, List } from 'lucide-react';
-import { SidebarItem } from './SidebarItem';
-import { usePathname } from 'next/navigation';
+import { BarChart, Compass, Layout, List } from "lucide-react";
+import { SidebarItem } from "./SidebarItem";
+import { usePathname } from "next/navigation";
 
 const guestRoutes = [
   {
     icon: Layout,
     label: "Dashboard",
-    href: "/"
+    href: "/",
   },
   {
     icon: Compass,
     label: "Course",
-    href: "/search"
+    href: "/search",
   },
 ];
 
@@ -32,19 +32,17 @@ const teacherRoutes = [
 export const SidebarRoutes = () => {
   const pathname = usePathname();
 
-  const isDashboardPage = pathname === "/"; // Check if it's the Dashboard
+  const isDashboardPage = pathname === "/"; // Check if it's the dashboard
   const isTeacherPage = pathname?.includes("/teacher");
+
+  // If on the dashboard, hide the sidebar
+  if (isDashboardPage) return null;
 
   // Determine the routes based on the current page
   const routes = isTeacherPage ? teacherRoutes : guestRoutes;
 
-  if (isDashboardPage) {
-    // If on the dashboard, return null or render an empty div to hide the sidebar
-    return null;
-  }
-
   return (
-    <div className='flex flex-col w-full'>
+    <aside className="flex flex-col w-full bg-gray-100 p-4">
       {routes.map((route) => (
         <SidebarItem
           key={route.href}
@@ -53,6 +51,6 @@ export const SidebarRoutes = () => {
           href={route.href}
         />
       ))}
-    </div>
+    </aside>
   );
 };
