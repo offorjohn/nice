@@ -2,7 +2,8 @@
 import { UserButton, useAuth } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { Button } from "./ui/button";
+
+import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { SearchInput } from "./SearchInput";
@@ -26,10 +27,11 @@ export const NavbarRoutes = () => {
         <SearchInput />
       </div>
 
-      {/* Login Button */}
       <div className="mt-1 ml-auto">
         <SignInButton mode="modal">
-          <Button>Log In</Button>
+          <Button className="bg-transparent hover:bg-transparent border-none nt-[600]">
+            Sign   In
+          </Button>
         </SignInButton>
       </div>
 
