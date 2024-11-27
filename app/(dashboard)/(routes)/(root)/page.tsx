@@ -2,6 +2,7 @@ import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import { CoursesList } from "@/components/CoursesList";
 import { InfoCard } from "./_components/info-card";
 import { CheckCircle, Clock } from "lucide-react";
+import { SignInButton } from "@clerk/nextjs"; // Import Clerk's SignInButton component
 
 export default async function Dashboard() {
   // Fetch courses without requiring a userId
@@ -10,8 +11,14 @@ export default async function Dashboard() {
   // Check if there are no courses to display
   if (completedCourses.length === 0 && coursesInProgress.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center h-screen space-y-4">
         <p className="text-gray-500">No courses available at this time.</p>
+        <SignInButton mode="modal">
+          {/* Single child for SignInButton */}
+          <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Log In
+          </button>
+        </SignInButton>
       </div>
     );
   }
