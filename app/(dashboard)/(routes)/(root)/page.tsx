@@ -2,7 +2,7 @@
 import React from "react";
 import { Skeleton } from "@/components/ui/skeleton"; // Ensure this path is correct
 
-export function SkeletonCard() {
+export function DashboardLayout() {
   return (
     <div className="space-y-3">
       <div className="flex items-center space-x-3">
