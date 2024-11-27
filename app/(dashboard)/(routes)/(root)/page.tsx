@@ -34,7 +34,7 @@ const HomePage = () => {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Home Page</h1>
-      {loading ? <SkeletonCard /> : <Skeleton/>} {/* Toggle loading state */}
+      {loading ? <Skeleton /> : <Skeleton/>} {/* Toggle loading state */}
     </div>
   );
 };
