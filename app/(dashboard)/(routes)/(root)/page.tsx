@@ -1,84 +1,111 @@
-'use client';
+"use client";
 
 import React from "react";
-import { Skeleton } from "@/components/ui/skeleton"; // Ensure this path is correct
+import { Skeleton } from "@/components/ui/skeleton"; // Loading skeleton for the initial data loading state
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+} from "@/components/ui/carousel"; // Carousel components for creating the sliding carousel
+import { Card, CardContent } from "@/components/ui/card"; // Card components for styling carousel items
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Icons for navigation buttons
 
 const HomePage = () => {
-  const [loading, setLoading] = React.useState(true);
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-
-  const totalItems = 5; // Total number of carousel items
+  const [loading, setLoading] = React.useState(true); // State to manage loading status
+  const [currentIndex, setCurrentIndex] = React.useState(0); // State to track the currently displayed carousel item
+  const totalItems = 5; // Total number of items in the carousel
 
   React.useEffect(() => {
-    // Simulate data loading
-    const loadingTimeout = setTimeout(() => setLoading(false), 2000);
-
-    return () => clearTimeout(loadingTimeout);
+    const loadingTimeout = setTimeout(() => setLoading(false), 2000); // Simulate data loading
+    return () => clearTimeout(loadingTimeout); // Cleanup timeout
   }, []);
 
   React.useEffect(() => {
     if (!loading) {
-      // Automatically update the current index every second
       const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems); // Auto slide every 8 seconds
       }, 8000);
 
-      return () => clearInterval(interval); // Cleanup interval on component unmount
+      return () => clearInterval(interval); // Cleanup interval
     }
   }, [loading]);
 
+  // Handler to navigate to the next slide
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
+  };
+
+  // Handler to navigate to the previous slide
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalItems) % totalItems); // Properly wrap around to the last item
+  };
+
+  // Handler for clickable numbers
+  const handleNumberClick = (index: number) => {
+    setCurrentIndex(index);
+  };
+
   return (
-      <div className="flex flex-col items-center translate-y-1 text-center">
-        
-        {loading ? (
-          <Skeleton className="h-[125px] w-[550px] rounded-xl" />
-        ) : (
-          <div className="relative w-full max-w-xs overflow-hidden">
-            <Carousel className="w-full">
-              <CarouselContent
-                style={{
-                  display: "flex",
-                  transform: `translateX(-${currentIndex * 100}%)`,
-                  transition: "transform 0.5s ease",
-                }}
+    <div className="flex flex-col items-center translate-y-1 text-center">
+      {loading ? (
+        <Skeleton className="h-[125px] w-[550px] rounded-xl" />
+      ) : (
+        <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[400px] overflow-hidden">
+          <Carousel className="w-full h-full relative">
+            <CarouselContent
+              style={{
+                display: "flex",
+                transform: `translateX(-${currentIndex * 100}%)`, // This moves the carousel
+                transition: "transform 0.5s ease", // Add smooth transition when switching slides
+              }}
+            >
+              {Array.from({ length: totalItems }).map((_, index) => (
+                <CarouselItem key={index} className="flex-shrink-0 w-full h-full">
+                  <div className="p-4 h-full">
+                    <Card className="h-full">
+                      <CardContent className="flex h-full items-center justify-center p-6">
+                        <span className="text-4xl font-semibold">{index + 1}</span>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+
+          {/* Previous Button */}
+          <button
+            onClick={handlePrevious}
+            className="absolute left-4 bottom-4 z-10 bg-gray-800 text-white p-3 rounded-full cursor-pointer hover:bg-gray-700 flex items-center justify-center"
+          >
+            <FaChevronLeft size={20} />
+          </button>
+
+          {/* Next Button */}
+          <button
+            onClick={handleNext}
+            className="absolute right-4 bottom-4 z-10 bg-gray-800 text-white p-3 rounded-full cursor-pointer hover:bg-gray-700 flex items-center justify-center"
+          >
+            <FaChevronRight size={20} />
+          </button>
+
+          {/* Render numbers below the carousel, make them clickable */}
+          <div className="mt-4 flex justify-center space-x-4">
+            {Array.from({ length: totalItems }).map((_, index) => (
+              <button
+                key={index}
+                className={`text-2xl font-semibold ${
+                  currentIndex === index ? "text-blue-500" : "text-gray-500"
+                }`}
+                onClick={() => handleNumberClick(index)}
               >
-                {Array.from({ length: totalItems }).map((_, index) => (
-                  <CarouselItem key={index} className="flex-shrink-0 w-full">
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex aspect-square items-center justify-center p-6">
-                          <span className="text-4xl font-semibold">{index + 1}</span>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious
-                onClick={() =>
-                  setCurrentIndex((prevIndex) =>
-                    prevIndex === 0 ? totalItems - 1 : prevIndex - 1
-                  )
-                }
-              />
-              <CarouselNext
-                onClick={() =>
-                  setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems)
-                }
-              />
-            </Carousel>
+                {index + 1}
+              </button>
+            ))}
           </div>
-        )}
-      </div>
-  
+        </div>
+      )}
+    </div>
   );
 };
 
