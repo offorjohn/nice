@@ -50,7 +50,7 @@ const HomePage = () => {
       {loading ? (
         <Skeleton className="h-[125px] w-[550px] rounded-xl" />
       ) : (
-        <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[400px] overflow-hidden">
+        <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[1200px] overflow-hidden">
           <Carousel className="w-full h-full relative">
             <CarouselContent
               style={{
@@ -60,34 +60,42 @@ const HomePage = () => {
               }}
             >
               {Array.from({ length: totalItems }).map((_, index) => (
-                <CarouselItem key={index} className="flex-shrink-0 w-full h-full">
+                <CarouselItem
+                  key={index}
+                  className="flex-shrink-0 w-full h-full"
+                >
                   <div className="p-4 h-full">
                     <Card className="h-full">
                       <CardContent className="flex h-full items-center justify-center p-6">
-                        <span className="text-4xl font-semibold">{index + 1}</span>
+                        <span className="text-4xl font-semibold">
+                          {index + 1}
+                        </span>
                       </CardContent>
                     </Card>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
+
+            {/* Div to hold the buttons inside the carousel */}
+            <div className="absolute inset-x-6 top-9 flex justify-between items-center z-50">
+              {/* Previous Button */}
+              <button
+                onClick={handlePrevious}
+                className="bg-gray-800 text-white p-3 rounded-full cursor-pointer hover:bg-gray-700 flex items-center justify-center"
+              >
+                <FaChevronLeft size={20} />
+              </button>
+
+              {/* Next Button */}
+              <button
+                onClick={handleNext}
+                className="bg-gray-800 text-white p-3 rounded-full cursor-pointer hover:bg-gray-700 flex items-center justify-center"
+              >
+                <FaChevronRight size={20} />
+              </button>
+            </div>
           </Carousel>
-
-          {/* Previous Button */}
-          <button
-            onClick={handlePrevious}
-            className="absolute left-4 bottom-4 z-10 bg-gray-800 text-white p-3 rounded-full cursor-pointer hover:bg-gray-700 flex items-center justify-center"
-          >
-            <FaChevronLeft size={20} />
-          </button>
-
-          {/* Next Button */}
-          <button
-            onClick={handleNext}
-            className="absolute right-4 bottom-4 z-10 bg-gray-800 text-white p-3 rounded-full cursor-pointer hover:bg-gray-700 flex items-center justify-center"
-          >
-            <FaChevronRight size={20} />
-          </button>
 
           {/* Render numbers below the carousel, make them clickable */}
           <div className="mt-4 flex justify-center space-x-4">
