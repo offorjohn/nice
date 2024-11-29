@@ -7,6 +7,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"; // Carousel components for creating the sliding carousel
+import { NavbarRoutes } from "@/components/NavbarRoutes";
 import { Card, CardContent } from "@/components/ui/card"; // Card components for styling carousel items
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Icons for navigation buttons
 
@@ -47,6 +48,8 @@ const HomePage = () => {
 
   return (
     <div className="flex flex-col items-center translate-y-1 text-center">
+           {/* Use Navbar at the top */}
+      <NavbarRoutes />
       {loading ? (
         <Skeleton className="h-[125px] w-[550px] rounded-xl" />
       ) : (

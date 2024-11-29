@@ -22,20 +22,19 @@ export const NavbarRoutes = () => {
   const isPlayerPage = pathname?.includes("/courses");
 
   return (
-    <>
-      <div className="flex gap-x-2 ml-auto items-center">
+    <div className="flex items-center justify-between w-full px-4 py-2 gap-6">
+      {/* Search Input */}
+      <div className="ml-[-2px] lg:ml-[120px]">
         <SearchInput />
       </div>
 
-      <div className="mt-1 ml-auto">
+      {/* Navbar Actions */}
+      <div className="flex items-center gap-x-1 ">
+        {/* Sign In Button */}
         <SignInButton mode="modal">
-          <Button className="bg-transparent hover:bg-transparent border-none nt-[600]">
-            Sign   In
-          </Button>
+          <Button>Sign In</Button>
         </SignInButton>
-      </div>
 
-      <div className="flex gap-x-2 ml-auto items-center">
         {/* Theme Toggle Button */}
         <Button
           size="sm"
@@ -66,8 +65,9 @@ export const NavbarRoutes = () => {
           </Link>
         ) : null}
 
+        {/* User Button */}
         <UserButton afterSignOutUrl="/" />
       </div>
-    </>
+    </div>
   );
 };
