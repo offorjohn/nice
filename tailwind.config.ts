@@ -8,6 +8,9 @@ const config: Config = withUt({
   ],
   theme: {
     extend: {
+      colors: {
+        'yellow-350': 'var(--color-yellow-350)', // Reference the CSS variable
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

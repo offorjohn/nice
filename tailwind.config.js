@@ -18,6 +18,8 @@ module.exports = withUt({
     },
     extend: {
       colors: {
+
+        'yellow-350': 'var(--color-yellow-350)', // Reference the CSS variable
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
