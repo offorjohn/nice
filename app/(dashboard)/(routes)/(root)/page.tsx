@@ -60,21 +60,7 @@ const HomePage = () => {
             </span>
           </div>
 
-          <div className="flex items-center space-x-4">
-      <Skeleton className="h-12 w-12 rounded-full" />
-      <div className="space-y-2">
-      {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="relative">
-                <Skeleton className="h-[150px] w-[300px] rounded-lg" />
-                <span className="absolute inset-0 flex justify-center items-center text-white font-bold">
-                  Category {index + 1}
-                </span>
-              </div>
-            ))}
-        <Skeleton className="h-4 w-[250px]" />
-        <Skeleton className="h-4 w-[200px]" />
-      </div>
-    </div>
+  
 
 
           {/* Featured Courses */}
