@@ -125,12 +125,10 @@ const HomePage = () => {
             </div>
           </div>
         ) : (
-
-          
-          <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[2200px] overflow-hidden">
+          <div className="relative w-full h-[2200px] overflow-hidden md:max-w-[100%]">
             {/* Carousel Section */}
 
-            <Carousel className="relative w-full h-[900px] overflow-hidden">
+            <Carousel className="relative w-full h-[900px] overflow-hidden ">
               <CarouselContent
                 style={{
                   display: "flex",
@@ -147,12 +145,12 @@ const HomePage = () => {
                       <Card className="h-full">
                         <CardContent className="flex h-full items-center justify-center p-6">
                           {/* Image Section */}
-                          <div className="relative max-w-[600px]">
+                          <div className="relative max-w-[600px] ">
                             <img
-                              src={`https://via.placeholder.com/1200x600?text=Slide+${
+                              src={`https://randomuser.me/api/portraits/men/${
                                 index + 1
-                              }`}
-                              alt={`Slide ${index + 1}`}
+                              }.jpg`}
+                              alt={`Person ${index + 1}`}
                               className="w-full h-full object-cover rounded-lg"
                             />
                           </div>
