@@ -25,7 +25,7 @@ const HomePage = () => {
     if (!loading) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems); // Auto-slide every 8 seconds
-      }, 8000);
+      }, 11000);
 
       return () => clearInterval(interval); // Cleanup interval
     }
@@ -125,10 +125,10 @@ const HomePage = () => {
             </div>
           </div>
         ) : (
-          <div className="relative w-full h-[2200px] overflow-hidden md:max-w-[100%]">
+          <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[2200px] overflow-hidden">
             {/* Carousel Section */}
 
-            <Carousel className="relative w-full h-[900px] overflow-hidden ">
+            <Carousel className="relative w-full h-[900px] overflow-hidden">
               <CarouselContent
                 style={{
                   display: "flex",
@@ -145,18 +145,21 @@ const HomePage = () => {
                       <Card className="h-full">
                         <CardContent className="flex h-full items-center justify-center p-6">
                           {/* Image Section */}
-                          <div className="relative max-w-[600px] ">
-                            <img
-                              src={`https://randomuser.me/api/portraits/men/${
-                                index + 1
-                              }.jpg`}
-                              alt={`Person ${index + 1}`}
+                          <div className="relative w-full md:w-4/5 lg:w-3/4 h-[200px] md:h-[300px] lg:h-[350px] mx-auto">
+                            <video
+                              src="/video.mp4"
+                              controls
+                              autoPlay
+                              loop
+                              muted
                               className="w-full h-full object-cover rounded-lg"
-                            />
+                            ></video>
                           </div>
+                          
+
                           {/* Optional Slide Title */}
-                          <span className="absolute bottom-5 left-5 text-white text-2xl font-semibold bg-gray-800 bg-opacity-50 p-2 rounded-lg">
-                            Slide {index + 1}
+                          <span className="absolute bottom-5 left-8 text-white text-2xl font-semibold bg-gray-800 bg-opacity-50 p-2 rounded-lg">
+                            Learn Video Editing {index + 1}
                           </span>
                         </CardContent>
                       </Card>
