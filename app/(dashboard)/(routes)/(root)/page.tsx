@@ -43,42 +43,48 @@ const HomePage = () => {
 
   return (
     <>
-<div className="fixed top-0 left-0 w-full z-50 shadow-md bg-yellow-350">
-  <NavbarRoutes />
-</div>
+      <div className="fixed top-0 left-0 w-full z-50 shadow-md bg-yellow-350">
+        <NavbarRoutes />
+      </div>
 
-
-  
-    
-    <div className="flex flex-col items-center    text-center">
+      <div className="flex flex-col items-center    text-center">
         {/* Sticky Header */}
-
 
         {loading ? (
           <div className="space-y-6">
             {/* Hero Section */}
-            <div className="relative flex flex-col md:flex-row md:space-x-4 space-y-1 md:space-y-0">
+            <div className="relative flex flex-col md:flex-row md:space-x-20 space-y-1 md:space-y-5">
               {/* First Skeleton with Text */}
-              <div className="relative">
+              <div className="relative flex flex-col md:flex-row md:space-x-20 space-y-1 md:space-y-5">
+                {/* First Skeleton with Text */}
+                <div className="relative mt-5">
+                  {" "}
+                  {/* Adjust the value as needed */}
+                  <div className="space-y-5">
+                    {" "}
+                    {/* Wrap the whole section to add spacing */}
+                    {/* First Skeleton */}
+                    <Skeleton className="h-[230px] w-full md:w-[500px] rounded-lg" />
+                    {/* Second Skeletons with Text */}
+                    <div className="space-y-4">
+                      {" "}
+                      {/* Adjust the space-y to 4 or higher for better spacing */}
+                      <Skeleton className="h-4 w-[350px]" />
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
+                    </div>
+                  </div>
+                  <span className="absolute inset-0 flex justify-center items-center text-white font-bold translate-y-[-20%]">
+                    Just Live
+                  </span>
+                </div>
+              </div>
+
+              {/* Second Skeleton with Text */}
+              <div className="  md:space-x-20relative">
                 <Skeleton className="h-[350px] w-full md:w-[500px] rounded-lg" />
                 <span className="absolute inset-0 flex justify-center items-center text-white font-bold">
                   Just Live
-                </span>
-              </div>
-
-              {/* Second Skeleton with Text */}
-              <div className="relative">
-                <Skeleton className="h-[350px] w-full md:w-[500px] rounded-lg" />
-                <span className="absolute inset-0 flex justify-center items-center text-white font-bold">
-                  Discover Top Courses
-                </span>
-              </div>
-
-              {/* Second Skeleton with Text */}
-              <div className="relative">
-                <Skeleton className="h-[350px] w-full md:w-[500px] rounded-lg" />
-                <span className="absolute inset-0 flex justify-center items-center text-white font-bold">
-                  Discover Top Courses
                 </span>
               </div>
             </div>
@@ -90,7 +96,8 @@ const HomePage = () => {
                 {Array.from({ length: 8 }).map((_, index) => (
                   <Skeleton
                     key={index}
-                    className="h-[200px] w-full rounded-lg" />
+                    className="h-[200px] w-full rounded-lg"
+                  />
                 ))}
               </div>
             </div>
@@ -111,15 +118,19 @@ const HomePage = () => {
                 {Array.from({ length: 8 }).map((_, index) => (
                   <Skeleton
                     key={index}
-                    className="h-[200px] w-full rounded-lg" />
+                    className="h-[200px] w-full rounded-lg"
+                  />
                 ))}
               </div>
             </div>
           </div>
         ) : (
-          <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[1200px] overflow-hidden">
+
+          
+          <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[2200px] overflow-hidden">
             {/* Carousel Section */}
-            <Carousel className="relative w-full h-[400px] overflow-hidden">
+
+            <Carousel className="relative w-full h-[900px] overflow-hidden">
               <CarouselContent
                 style={{
                   display: "flex",
@@ -135,7 +146,18 @@ const HomePage = () => {
                     <div className="p-4 h-full">
                       <Card className="h-full">
                         <CardContent className="flex h-full items-center justify-center p-6">
-                          <span className="text-4xl font-semibold">
+                          {/* Image Section */}
+                          <div className="relative max-w-[600px]">
+                            <img
+                              src={`https://via.placeholder.com/1200x600?text=Slide+${
+                                index + 1
+                              }`}
+                              alt={`Slide ${index + 1}`}
+                              className="w-full h-full object-cover rounded-lg"
+                            />
+                          </div>
+                          {/* Optional Slide Title */}
+                          <span className="absolute bottom-5 left-5 text-white text-2xl font-semibold bg-gray-800 bg-opacity-50 p-2 rounded-lg">
                             Slide {index + 1}
                           </span>
                         </CardContent>
@@ -162,23 +184,14 @@ const HomePage = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
+
+              {/* Scrollable Divs */}
+              <div>fff</div>
             </Carousel>
-
-
-            {/* Scrollable Divs */}
-            <div className="mt-8 space-y-8">
-              {Array.from({ length: 20 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="h-[150px] bg-gray-200 rounded-md shadow-md flex items-center justify-center text-lg font-medium text-gray-700"
-                >
-                  Scrollable Div {index + 1}
-                </div>
-              ))}
-            </div>
           </div>
         )}
-      </div></>
+      </div>
+    </>
   );
 };
 

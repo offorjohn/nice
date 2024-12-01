@@ -42,9 +42,9 @@ export const NavbarRoutes = () => {
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         >
           {theme === "light" ? (
-            <Moon className="h-4 w-4" />
+            <Moon className="h-4 bg w-4" />
           ) : (
-            <Sun className="h-4 w-4" />
+            <Sun className="h-4 bg-orange-300 w-4" />
           )}
           <span className="sr-only">Toggle theme</span>
         </Button>
