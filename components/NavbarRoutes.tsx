@@ -11,6 +11,7 @@ import { isTeacher } from "@/lib/teacher";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 import { SignInButton } from "@clerk/nextjs"; // Clerk login button
+import { MobileSideBar } from "@/app/(dashboard)/_components/MobileSideBar";
 
 export const NavbarRoutes = () => {
   const { userId } = useAuth();
@@ -23,8 +24,10 @@ export const NavbarRoutes = () => {
 
   return (
     <div className="flex items-center justify-between w-full px-4 py-2 gap-6">
+         <MobileSideBar/>
       {/* Search Input */}
-      <div className="ml-[-2px] lg:ml-[120px]">
+      <div className="ml-[-0px] lg:ml-[120px]">
+     
         <SearchInput />
       </div>
 
