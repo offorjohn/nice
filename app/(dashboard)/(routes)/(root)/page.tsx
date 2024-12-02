@@ -14,7 +14,44 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Icons for car
 const HomePage = () => {
   const [loading, setLoading] = React.useState(true); // State to manage loading status
   const [currentIndex, setCurrentIndex] = React.useState(0); // State to track the current carousel item
-  const totalItems = 5; // Total number of items in the carousel
+  const carouselItems = [
+    {
+      mediaSrc: "/video.mp4",
+
+      type: "video", // Type of media (video or image)
+      title: "Master the Art of Video Editing",
+      description: "Learn how to edit videos like a pro.",
+    },
+    {
+      mediaSrc: "/one.png",
+
+      type: "image", // Type of media (video or image)
+      title: "Learn Web Development",
+      description: "Design graphics that captivate your audience.",
+    },
+    {
+      mediaSrc: "/tree.png",
+
+      type: "image", // Type of media (video or image)
+
+      title: "Create Stunning Graphics",
+      description: "Build modern websites from scratch.",
+    },
+    {
+      mediaSrc: "/two.jpg",
+
+      type: "image", // Type of media (video or image)
+      title: "Photography Essentials",
+      description: "Capture beautiful moments with your camera.",
+    },
+    {
+      mediaSrc: "/ds.png",
+
+      type: "image", // Type of media (video or image)
+      title: "Learn Game Developement",
+      description: "Grow your developemetnt  with effective Us.",
+    },
+  ];
 
   React.useEffect(() => {
     const loadingTimeout = setTimeout(() => setLoading(false), 2000); // Simulate data loading
@@ -23,22 +60,29 @@ const HomePage = () => {
 
   React.useEffect(() => {
     if (!loading) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems); // Auto-slide every 8 seconds
-      }, 11000);
+      const interval = setInterval(
+        () => {
+          setCurrentIndex((prevIndex) => {
+            const nextIndex = (prevIndex + 1) % carouselItems.length;
+            return nextIndex;
+          });
+        },
+        currentIndex === 0 ? 11000 : 5000
+      ); // 11 seconds for the first carousel, 5 seconds for subsequent items
 
-      return () => clearInterval(interval); // Cleanup interval
+      return () => clearInterval(interval);
     }
-  }, [loading]);
+  }, [loading, currentIndex]); // Add currentIndex as a dependency
 
-  // Handler to navigate to the next slide
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
   };
 
-  // Handler to navigate to the previous slide
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalItems) % totalItems); // Properly wrap around to the last item
+    setCurrentIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + carouselItems.length) % carouselItems.length
+    );
   };
 
   return (
@@ -127,8 +171,7 @@ const HomePage = () => {
         ) : (
           <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[2200px] overflow-hidden">
             {/* Carousel Section */}
-
-            <Carousel className="relative w-full h-[900px] overflow-hidden">
+            <Carousel className="relative w-full h-[900px] overflow-hidden ">
               <CarouselContent
                 style={{
                   display: "flex",
@@ -136,36 +179,50 @@ const HomePage = () => {
                   transition: "transform 0.5s ease",
                 }}
               >
-                {Array.from({ length: totalItems }).map((_, index) => (
+                {" "}
+                {carouselItems.map((item, index) => (
                   <CarouselItem
                     key={index}
-                    className="flex-shrink-0 w-full h-full relative"
+                    className="flex-shrink-0 w-full h-full relative "
                   >
+                    {/* Slide Content */}
                     <div className="p-4 h-full">
-                      <Card className="h-full">
+                      <Card className="h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-300 dark:border-gray-700">
                         <CardContent className="flex h-full items-center justify-center p-6">
                           {/* Image Section */}
-                          <div className="relative w-full md:w-4/5 lg:w-3/4 h-[200px] md:h-[300px] lg:h-[350px] mx-auto">
-                            <video
-                              src="/video.mp4"
-                              controls
-                              autoPlay
-                              loop
-                              muted
-                              className="w-full h-full object-cover rounded-lg"
-                            ></video>
-                          </div>
-                          
-
-                          {/* Optional Slide Title */}
-                          <span className="absolute bottom-5 left-8 text-white text-2xl font-semibold bg-gray-800 bg-opacity-50 p-2 rounded-lg">
-                            Learn Video Editing {index + 1}
-                          </span>
+                          {/* Conditional Rendering */}
+                          {/* Conditional Rendering */}
+                          {item.type === "video" ? (
+                            <div className="relative w-full md:w-4/5 lg:w-3/4 h-[200px] md:h-[300px] lg:h-[350px] mx-auto">
+                              <video
+                                src={item.mediaSrc}
+                                autoPlay
+                                loop
+                                muted
+                                className="w-full h-full object-cover rounded-lg"
+                              ></video>
+                            </div>
+                          ) : (
+                            <div className="relative w-full md:w-4/5 lg:w-3/4 h-[200px] md:h-[300px] lg:h-[350px] mx-auto">
+                              <img
+                                src={item.mediaSrc}
+                                alt={item.title}
+                                className="w-full h-full  rounded-lg"
+                              />
+                            </div>
+                          )}
+                          <h2 className="hidden md:block text-lg sm:text-xl md:text-2xl font-semibold p-2 rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 mt-9 mb-1 transform -translate-y-3">
+                            {item.title}
+                          </h2>
                         </CardContent>
                       </Card>
                     </div>
 
-                    {/* Navigation Buttons Inside Carousel Content */}
+                    <span className="block lg:hidden left-5  text-lg sm:text-xl md:text-2xl font-semibold p-2 rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white shadow-lg italic tracking-wide">
+                      {item.description}
+                    </span>
+
+                    {/* Navigation Buttons */}
                     {index === currentIndex && (
                       <div className="absolute inset-0 flex items-center justify-between px-4">
                         <button
@@ -185,9 +242,6 @@ const HomePage = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-
-              {/* Scrollable Divs */}
-              <div>fff</div>
             </Carousel>
           </div>
         )}
