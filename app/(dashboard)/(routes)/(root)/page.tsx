@@ -7,14 +7,115 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"; // Carousel components for sliding content
+import { styled } from '@mui/material/styles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 import { NavbarRoutes } from "@/components/NavbarRoutes";
 import { Card, CardContent } from "@/components/ui/card"; // Card components for styling carousel items
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Icons for carousel navigation
 
+
+const AntTabs = styled(Tabs)({
+  borderBottom: '1px solid #e8e8e8',
+  '& .MuiTabs-indicator': {
+    backgroundColor: '#1890ff',
+  },
+});
+
+const AntTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(
+  ({ theme }) => ({
+    textTransform: 'none',
+    minWidth: 0,
+    [theme.breakpoints.up('sm')]: {
+      minWidth: 0,
+    },
+    fontWeight: theme.typography.fontWeightRegular,
+    marginRight: theme.spacing(1),
+    color: 'rgba(0, 0, 0, 0.85)',
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:hover': {
+      color: '#40a9ff',
+      opacity: 1,
+    },
+    '&.Mui-selected': {
+      color: '#1890ff',
+      fontWeight: theme.typography.fontWeightMedium,
+    },
+    '&.Mui-focusVisible': {
+      backgroundColor: '#d1eaff',
+    },
+  }),
+);
+
+interface StyledTabsProps {
+  children?: React.ReactNode;
+  value: number;
+  onChange: (event: React.SyntheticEvent, newValue: number) => void;
+}
+
+const StyledTabs = styled((props: StyledTabsProps) => (
+  <Tabs
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  '& .MuiTabs-indicator': {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-indicatorSpan': {
+    maxWidth: 40,
+    width: '100%',
+    backgroundColor: '#635ee7',
+  },
+});
+
+interface StyledTabProps {
+  label: string;
+}
+
+const StyledTab = styled((props: StyledTabProps) => (
+  <Tab disableRipple {...props} />
+))(({ theme }) => ({
+  textTransform: 'none',
+  fontWeight: theme.typography.fontWeightRegular,
+  fontSize: theme.typography.pxToRem(15),
+  marginRight: theme.spacing(1),
+  color: 'rgba(255, 255, 255, 0.7)',
+  '&.Mui-selected': {
+    color: '#fff',
+  },
+  '&.Mui-focusVisible': {
+    backgroundColor: 'rgba(100, 95, 228, 0.32)',
+  },
+}));
+
+
+
 const HomePage = () => {
   const [loading, setLoading] = React.useState(true); // State to manage loading status
   const [currentIndex, setCurrentIndex] = React.useState(0); // State to track the current carousel item
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   const carouselItems = [
+
     {
       mediaSrc: "/video.mp4",
 
@@ -169,7 +270,8 @@ const HomePage = () => {
             </div>
           </div>
         ) : (
-          <div className="relative w-full max-w-[90%] md:max-w-[95%] h-[2200px] overflow-hidden">
+        
+        <div className="relative w-full max-w-[90%] md:max-w-[95%] min-h-screen overflow-hidden">
             {/* Carousel Section */}
             <Carousel className="relative w-full h-[900px] overflow-hidden ">
               <CarouselContent
@@ -242,7 +344,7 @@ const HomePage = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
                 Consolidate all the skills you need in one comprehensive
                 platform
               </h1>
@@ -250,11 +352,40 @@ const HomePage = () => {
                 From critical skills to technical topics, We supports your
                 professional development.
               </h1>
+              <Box sx={{ width: '100%' }}>
+      <Box sx={{ bgcolor: '#fff' }}>
+        <AntTabs value={value} onChange={handleChange} aria-label="ant example">
+          <AntTab label="Tab 1" />
+          <AntTab label="Tab 2" />
+          <AntTab label="Tab 3" />
+        </AntTabs>
+        <Box sx={{ p: 3 }} />
+      </Box>
+      <Box sx={{ bgcolor: '#2e1534' }}>
+        <StyledTabs
+          value={value}
+          onChange={handleChange}
+          aria-label="styled tabs example"
+        >
+          <StyledTab label="Workflows" />
+          <StyledTab label="Datasets" />
+          <StyledTab label="Connections" />
+        </StyledTabs>
+        <Box sx={{ p: 3 }} />
+      </Box>
+    </Box>
             </Carousel>
+            testing
           </div>
+          
         )}
+
+        footer 1
       </div>
+
+      footer 2
     </>
+    
   );
 };
 

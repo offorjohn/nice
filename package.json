@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.26.1",
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
     "@hello-pangea/dnd": "^16.3.0",
     "@hookform/resolvers": "^3.3.1",
+    "@mui/material": "^6.1.9",
     "@mux/mux-node": "^7.3.1",
     "@mux/mux-player-react": "^1.14.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
