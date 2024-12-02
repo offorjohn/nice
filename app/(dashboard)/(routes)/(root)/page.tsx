@@ -27,7 +27,7 @@ const HomePage = () => {
 
       type: "image", // Type of media (video or image)
       title: "Learn Web Development",
-      description: "Design graphics that captivate your audience.",
+      description: "Learn Web Development",
     },
     {
       mediaSrc: "/tree.png",
@@ -35,7 +35,7 @@ const HomePage = () => {
       type: "image", // Type of media (video or image)
 
       title: "Create Stunning Graphics",
-      description: "Build modern websites from scratch.",
+      description: "Create Stunning Graphics",
     },
     {
       mediaSrc: "/two.jpg",
@@ -49,7 +49,7 @@ const HomePage = () => {
 
       type: "image", // Type of media (video or image)
       title: "Learn Game Developement",
-      description: "Grow your developemetnt  with effective Us.",
+      description: "Learn Game Developement",
     },
   ];
 
@@ -242,6 +242,14 @@ const HomePage = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
+                Consolidate all the skills you need in one comprehensive
+                platform
+              </h1>
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
+                From critical skills to technical topics, We supports your
+                professional development.
+              </h1>
             </Carousel>
           </div>
         )}
