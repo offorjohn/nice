@@ -1,5 +1,5 @@
 "use client";
-import { Sidebar } from "@/components/ui/sidebar";
+import { useMediaQuery } from "@mui/material";
 import React from "react";
 import { Skeleton } from "@/components/ui/skeleton"; // Skeleton for loading placeholders
 import {
@@ -7,57 +7,57 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"; // Carousel components for sliding content
-import { styled } from '@mui/material/styles';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import { styled } from "@mui/material/styles";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
 import { NavbarRoutes } from "@/components/NavbarRoutes";
 import { Card, CardContent } from "@/components/ui/card"; // Card components for styling carousel items
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Icons for carousel navigation
 
-
 const AntTabs = styled(Tabs)({
-  borderBottom: '1px solid #e8e8e8',
-  '& .MuiTabs-indicator': {
-    backgroundColor: '#1890ff',
+  borderBottom: "1px solid #e8e8e8",
+  "& .MuiTabs-indicator": {
+    backgroundColor: "#1890ff",
   },
 });
 
-const AntTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    textTransform: 'none',
+const AntTab = styled((props: StyledTabProps) => (
+  <Tab disableRipple {...props} />
+))(({ theme }) => ({
+  textTransform: "none",
+  minWidth: 0,
+  [theme.breakpoints.up("sm")]: {
     minWidth: 0,
-    [theme.breakpoints.up('sm')]: {
-      minWidth: 0,
-    },
-    fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(1),
-    color: 'rgba(0, 0, 0, 0.85)',
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:hover': {
-      color: '#40a9ff',
-      opacity: 1,
-    },
-    '&.Mui-selected': {
-      color: '#1890ff',
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    '&.Mui-focusVisible': {
-      backgroundColor: '#d1eaff',
-    },
-  }),
-);
+  },
+  fontWeight: theme.typography.fontWeightRegular,
+  marginRight: theme.spacing(1),
+  color: "rgba(0, 0, 0, 0.85)",
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+  "&:hover": {
+    color: "#40a9ff",
+    opacity: 1,
+  },
+  "&.Mui-selected": {
+    color: "#1890ff",
+    fontWeight: theme.typography.fontWeightMedium,
+  },
+  "&.Mui-focusVisible": {
+    backgroundColor: "#d1eaff",
+  },
+}));
 
 interface StyledTabsProps {
   children?: React.ReactNode;
@@ -71,15 +71,15 @@ const StyledTabs = styled((props: StyledTabsProps) => (
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
   />
 ))({
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+  "& .MuiTabs-indicator": {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
   },
-  '& .MuiTabs-indicatorSpan': {
+  "& .MuiTabs-indicatorSpan": {
     maxWidth: 40,
-    width: '100%',
-    backgroundColor: '#635ee7',
+    width: "100%",
+    backgroundColor: "#635ee7",
   },
 });
 
@@ -90,32 +90,51 @@ interface StyledTabProps {
 const StyledTab = styled((props: StyledTabProps) => (
   <Tab disableRipple {...props} />
 ))(({ theme }) => ({
-  textTransform: 'none',
+  textTransform: "none",
   fontWeight: theme.typography.fontWeightRegular,
   fontSize: theme.typography.pxToRem(15),
   marginRight: theme.spacing(1),
-  color: 'rgba(255, 255, 255, 0.7)',
-  '&.Mui-selected': {
-    color: '#fff',
+  color: "rgba(255, 255, 255, 0.7)",
+  "&.Mui-selected": {
+    color: "#fff",
   },
-  '&.Mui-focusVisible': {
-    backgroundColor: 'rgba(100, 95, 228, 0.32)',
+  "&.Mui-focusVisible": {
+    backgroundColor: "rgba(100, 95, 228, 0.32)",
   },
 }));
-
-
 
 const HomePage = () => {
   const [loading, setLoading] = React.useState(true); // State to manage loading status
   const [currentIndex, setCurrentIndex] = React.useState(0); // State to track the current carousel item
   const [value, setValue] = React.useState(0);
+  const [isTabOpen, setIsTabOpen] = React.useState(false); // Tracks whether the content is visible
+
+  // Media query to check if the screen is large
+  const isLargeScreen = useMediaQuery("(min-width:100px)"); // Adjust breakpoint as needed
+
+  const handleTabClick = (tabIndex: React.SetStateAction<number>) => {
+    if (isLargeScreen) {
+      // Always show content on large screens
+      setValue(tabIndex);
+      setIsTabOpen(true);
+    } else {
+      if (value === tabIndex && isTabOpen) {
+        // Toggle visibility off for small screens
+        setIsTabOpen(false);
+        setValue(0);
+      } else {
+        // Toggle visibility on and set active tab for small screens
+        setIsTabOpen(true);
+        setValue(tabIndex);
+      }
+    }
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   const carouselItems = [
-
     {
       mediaSrc: "/video.mp4",
 
@@ -191,10 +210,8 @@ const HomePage = () => {
       <div className="fixed top-0 left-0 w-full z-50 shadow-md bg-yellow-350">
         <NavbarRoutes />
       </div>
-
       <div className="flex flex-col items-center    text-center">
         {/* Sticky Header */}
-
         {loading ? (
           <div className="space-y-6">
             {/* Hero Section */}
@@ -270,8 +287,7 @@ const HomePage = () => {
             </div>
           </div>
         ) : (
-        
-        <div className="relative w-full max-w-[90%] md:max-w-[95%] min-h-screen overflow-hidden">
+          <div className="relative w-full max-w-[90%] md:max-w-[80%] min-h-screen overflow-hidden">
             {/* Carousel Section */}
             <Carousel className="relative w-full h-[900px] overflow-hidden ">
               <CarouselContent
@@ -344,48 +360,107 @@ const HomePage = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
-                Consolidate all the skills you need in one comprehensive
-                platform
-              </h1>
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
-                From critical skills to technical topics, We supports your
-                professional development.
-              </h1>
-              <Box sx={{ width: '100%' }}>
-      <Box sx={{ bgcolor: '#fff' }}>
-        <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-          <AntTab label="Tab 1" />
-          <AntTab label="Tab 2" />
-          <AntTab label="Tab 3" />
-        </AntTabs>
-        <Box sx={{ p: 3 }} />
-      </Box>
-      <Box sx={{ bgcolor: '#2e1534' }}>
-        <StyledTabs
-          value={value}
-          onChange={handleChange}
-          aria-label="styled tabs example"
-        >
-          <StyledTab label="Workflows" />
-          <StyledTab label="Datasets" />
-          <StyledTab label="Connections" />
-        </StyledTabs>
-        <Box sx={{ p: 3 }} />
-      </Box>
-    </Box>
+              <div className="flex flex-col lg:items-start lg:pl-12">
+                <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
+                  Consolidate all the skills you need in one comprehensive
+                  platform
+                </h1>
+                <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
+                  From critical skills to technical topics, We support your
+                  professional development.
+                </h1>
+              </div>
+
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "column" }, // Layout remains vertical for both cases
+                }}
+              >
+                {/* Tab Navigation */}
+                <Box
+                  sx={{
+                    bgcolor: "#fff",
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" }, // Column on mobile, row on larger screens
+                    flexWrap: "wrap", // Ensures wrapping on smaller screens
+                    gap: 2, // Adds spacing between elements
+                  }}
+                >
+                  {/* Tab 1 */}
+                  <Box sx={{ flex: 1 }}>
+                    <AntTabs
+                      sx={{
+                        textAlign: "center",
+                      }}
+                      onClick={() => handleTabClick(0)} // Toggle visibility of Tab 1
+                    >
+                      <AntTab label="Tab 1" />
+                    </AntTabs>
+                    <Box
+                      sx={{
+                        width: "100%", // Full width of the container
+                        height: "2px", // Thickness of the line
+                        backgroundColor: "black", // Line color
+                        marginTop: "4px", // Space between the tab and the line
+                      }}
+                    />
+
+                    {value === 0 && (isTabOpen || isLargeScreen)  && (
+                      <Box sx={{ bgcolor: "#f5f5f5", p: 3 }}>
+                        Content for Tab 1
+                      </Box>
+                    )}
+                  </Box>
+
+                  {/* Tab 2 */}
+                  <Box sx={{ flex: 1 }}>
+                    <AntTabs
+                      sx={{
+                        textAlign: "center",
+                        borderBottom: value === 1 ? "2px solid #000" : "none",
+                      }}
+                      onClick={() => setValue(1)}
+                    >
+                      <AntTab label="Tab 1" />
+                    </AntTabs>
+                    {value === 1 && (
+                      <Box sx={{ bgcolor: "#f5f5f5", p: 3 }}>
+                        Content for Tab 2
+                      </Box>
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Styled Tabs Section */}
+                <Box sx={{ bgcolor: "#2e1534", mt: 3 }}>
+                  <StyledTabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="horizontal styled tabs example"
+                  >
+                    <StyledTab label="Workflows" />
+                    <StyledTab label="Datasets" />
+                    <StyledTab label="Connections" />
+                  </StyledTabs>
+                </Box>
+
+                {/* Styled Tabs Content */}
+                <Box sx={{ bgcolor: "#2e1534", color: "#fff", p: 3 }}>
+                  {value === 0 && <div>Workflows content goes here...</div>}
+                  {value === 1 && <div>Datasets content goes here...</div>}
+                  {value === 2 && <div>Connections content goes here...</div>}
+                </Box>
+              </Box>
             </Carousel>
             testing
           </div>
-          
         )}
-
         footer 1
       </div>
-
       footer 2
     </>
-    
   );
 };
 
