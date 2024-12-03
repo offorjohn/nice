@@ -108,27 +108,22 @@ const HomePage = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0); // State to track the current carousel item
   const [value, setValue] = React.useState(0);
   const [isTabOpen, setIsTabOpen] = React.useState(false); // Tracks whether the content is visible
-
-  // Media query to check if the screen is large
-  const isLargeScreen = useMediaQuery("(min-width:100px)"); // Adjust breakpoint as needed
+  
 
   const handleTabClick = (tabIndex: React.SetStateAction<number>) => {
-    if (isLargeScreen) {
-      // Always show content on large screens
-      setValue(tabIndex);
-      setIsTabOpen(true);
+    if (value === tabIndex && isTabOpen) {
+      // If the same tab is clicked again, toggle visibility off
+      setIsTabOpen(false);
+      setValue(0);
     } else {
-      if (value === tabIndex && isTabOpen) {
-        // Toggle visibility off for small screens
-        setIsTabOpen(false);
-        setValue(0);
-      } else {
-        // Toggle visibility on and set active tab for small screens
-        setIsTabOpen(true);
-        setValue(tabIndex);
-      }
+      // If a new tab is clicked, toggle visibility on and set active tab
+      setIsTabOpen(true);
+      setValue(tabIndex);
     }
   };
+     
+    
+
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -407,7 +402,7 @@ const HomePage = () => {
                       }}
                     />
 
-                    {value === 0 && (isTabOpen || isLargeScreen)  && (
+                    {value === 0 && isTabOpen  && (
                       <Box sx={{ bgcolor: "#f5f5f5", p: 3 }}>
                         Content for Tab 1
                       </Box>
