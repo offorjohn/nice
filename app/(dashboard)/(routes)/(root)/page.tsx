@@ -1,5 +1,4 @@
 "use client";
-import { useMediaQuery } from "@mui/material";
 import React from "react";
 import { Skeleton } from "@/components/ui/skeleton"; // Skeleton for loading placeholders
 import {
@@ -10,7 +9,7 @@ import {
 import { styled } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Divider from "@mui/material/Divider";
+import SvgIcon from "@mui/material/SvgIcon";
 import Box from "@mui/material/Box";
 import { NavbarRoutes } from "@/components/NavbarRoutes";
 import { Card, CardContent } from "@/components/ui/card"; // Card components for styling carousel items
@@ -107,8 +106,10 @@ const HomePage = () => {
   const [loading, setLoading] = React.useState(true); // State to manage loading status
   const [currentIndex, setCurrentIndex] = React.useState(0); // State to track the current carousel item
   const [value, setValue] = React.useState(0);
-  const [isTabOpen, setIsTabOpen] = React.useState(false); // Tracks whether the content is visible
-  
+  const [isTabOpen, setIsTabOpen] = React.useState(true); // Tracks whether the content is visible
+
+  // State to track if the screen is mobile-sized
+  const [isMobile, setIsMobile] = React.useState(false);
 
   const handleTabClick = (tabIndex: React.SetStateAction<number>) => {
     if (value === tabIndex && isTabOpen) {
@@ -121,10 +122,6 @@ const HomePage = () => {
       setValue(tabIndex);
     }
   };
-     
-    
-
-
 
   const carouselItems = [
     {
@@ -189,6 +186,23 @@ const HomePage = () => {
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
   };
+
+  // Check screen size when the component mounts or when the window resizes
+  React.useEffect(() => {
+    const handleResize = () => {
+      // Set isMobile to true if screen width is 600px or less (smaller screens)
+      setIsMobile(window.innerWidth <= 600);
+    };
+
+    // Initial check when component mounts
+    handleResize();
+
+    // Attach event listener to resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener when component unmounts
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handlePrevious = () => {
     setCurrentIndex(
@@ -389,17 +403,32 @@ const HomePage = () => {
                       onClick={() => handleTabClick(0)} // Toggle visibility of Tab 1
                     >
                       <AntTab label="Tab 1" />
+                      {/* Conditional render: Show the icon only on mobile */}
+                      {isMobile && (
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            right: 0,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            paddingRight: 2,
+                          }}
+                        >
+                          <SvgIcon sx={{ fontSize: 24, color: "black" }}>
+                            <path d="M7 10l5 5 5-5z" />
+                          </SvgIcon>
+                        </Box>
+                      )}
                     </AntTabs>
                     <Box
                       sx={{
-                        width: "100%", // Full width of the container
+                        width: "10%", // Full width of the container
                         height: "2px", // Thickness of the line
-                        backgroundColor: "black", // Line color
                         marginTop: "4px", // Space between the tab and the line
                       }}
                     />
 
-                    {value === 0 && isTabOpen  && (
+                    {value === 0 && isTabOpen && (
                       <Box sx={{ bgcolor: "#f5f5f5", p: 3 }}>
                         Content for Tab 1
                       </Box>
@@ -411,22 +440,36 @@ const HomePage = () => {
                     <AntTabs
                       sx={{
                         textAlign: "center",
-                        borderBottom: value === 1 ? "2px solid #000" : "none",
                       }}
                       onClick={() => handleTabClick(1)} // Toggle visibility of Tab 1
                     >
-                      <AntTab label="Tab 1" />
+                      <AntTab label="Tab 2" />
+                       {/* Conditional render: Show the icon only on mobile */}
+                       {isMobile && (
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            right: 0,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            paddingRight: 2,
+                          }}
+                        >
+                          <SvgIcon sx={{ fontSize: 24, color: "black" }}>
+                            <path d="M7 10l5 5 5-5z" />
+                          </SvgIcon>
+                        </Box>
+                      )}
                     </AntTabs>
-                    {value ===  1 && isTabOpen &&(
+
+
+                    {value === 1 && isTabOpen && (
                       <Box sx={{ bgcolor: "#f5f5f5", p: 3 }}>
                         Content for Tab 2
                       </Box>
                     )}
                   </Box>
                 </Box>
-
-             
-               
               </Box>
             </Carousel>
             testing
