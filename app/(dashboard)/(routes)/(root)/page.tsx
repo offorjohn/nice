@@ -125,9 +125,6 @@ const HomePage = () => {
     
 
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
 
   const carouselItems = [
     {
@@ -416,11 +413,11 @@ const HomePage = () => {
                         textAlign: "center",
                         borderBottom: value === 1 ? "2px solid #000" : "none",
                       }}
-                      onClick={() => setValue(1)}
+                      onClick={() => handleTabClick(1)} // Toggle visibility of Tab 1
                     >
                       <AntTab label="Tab 1" />
                     </AntTabs>
-                    {value === 1 && (
+                    {value ===  1 && isTabOpen &&(
                       <Box sx={{ bgcolor: "#f5f5f5", p: 3 }}>
                         Content for Tab 2
                       </Box>
@@ -428,25 +425,8 @@ const HomePage = () => {
                   </Box>
                 </Box>
 
-                {/* Styled Tabs Section */}
-                <Box sx={{ bgcolor: "#2e1534", mt: 3 }}>
-                  <StyledTabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="horizontal styled tabs example"
-                  >
-                    <StyledTab label="Workflows" />
-                    <StyledTab label="Datasets" />
-                    <StyledTab label="Connections" />
-                  </StyledTabs>
-                </Box>
-
-                {/* Styled Tabs Content */}
-                <Box sx={{ bgcolor: "#2e1534", color: "#fff", p: 3 }}>
-                  {value === 0 && <div>Workflows content goes here...</div>}
-                  {value === 1 && <div>Datasets content goes here...</div>}
-                  {value === 2 && <div>Connections content goes here...</div>}
-                </Box>
+             
+               
               </Box>
             </Carousel>
             testing
