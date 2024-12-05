@@ -363,7 +363,7 @@ const HomePage = () => {
               <Box sx={{ flex: 1 }}>
       {/* Tab 1 */}
       <AntTabs sx={{ textAlign: "center" }} onClick={() => handleTabClick(0)}>
-        <AntTab label="Tab 1" />
+        <AntTab label="Tab 1.1" />
         {/* Conditional render: Show the icon only on mobile */}
         {isMobile && (
           <Box
