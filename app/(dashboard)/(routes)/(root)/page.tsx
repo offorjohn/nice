@@ -15,7 +15,8 @@ import { NavbarRoutes } from "@/components/NavbarRoutes";
 import { Card, CardContent } from "@/components/ui/card"; // Card components for styling carousel items
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Icons for carousel navigation
 import Typography from "@mui/material/Typography/Typography";
-import SwipeableViews from "react-swipeable-views";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const AntTabs = styled(Tabs)({
   borderBottom: "1px solid #e8e8e8",
@@ -360,113 +361,161 @@ const HomePage = () => {
                   professional development.
                 </h1>
               </div>
-              <Box sx={{ flex: 1 }}>
-      {/* Tab 1 */}
-      <AntTabs sx={{ textAlign: "center" }} onClick={() => handleTabClick(0)}>
-        <AntTab label="Tab 1.1" />
-        {/* Conditional render: Show the icon only on mobile */}
-        {isMobile && (
-          <Box
-            sx={{
-              position: "absolute",
-              right: 0,
-              top: "50%",
-              transform: "translateY(-50%)",
-              paddingRight: 2,
-            }}
-          >
-            <SvgIcon sx={{ fontSize: 24, color: "black" }}>
-              <path d="M7 10l5 5 5-5z" />
-            </SvgIcon>
-          </Box>
-        )}
-      </AntTabs>
-
-      <Box
-        sx={{
-          width: "10%", // Full width of the container
-          height: "2px", // Thickness of the line
-          marginTop: "4px", // Space between the tab and the line
-        }}
-      />
-
+              {/* Tab 1 */}
+              <AntTabs
+                sx={{ textAlign: "center" }}
+                onClick={() => handleTabClick(0)}
+              >
+                <AntTab label="Tab 1.1" />
+                {/* Conditional render: Show the icon only on mobile */}
+                {isMobile && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      right: 0,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      paddingRight: 2,
+                    }}
+                  >
+                    <SvgIcon sx={{ fontSize: 24, color: "black" }}>
+                      <path d="M7 10l5 5 5-5z" />
+                    </SvgIcon>
+                  </Box>
+                )}
+              </AntTabs>
+              <Box
+                sx={{
+                  width: "100%", // Full width of the container
+                  overflow: "hidden", // Ensure content doesn't overflow
+                }}
+              >
+                
       {/* Conditionally render content */}
       {value === 0 && isTabOpen && (
-        <Box
-          sx={{
-            width: "100%", // Ensure the container takes full width
-            overflow: "hidden", // Hide the overflow to keep it within bounds
-          }}
-        >
-          <SwipeableViews
-            enableMouseEvents
-            style={{
-              display: "flex", // Use flexbox layout to arrange boxes side by side
-              width: "200%", // Ensure the width is enough to accommodate two boxes at once
-            }}
-            slideStyle={{
-              flex: "1 0 50%", // Each box takes up 50% of the total width, allowing two boxes visible at once
-              padding: "0 10px", // Add space between the boxes
-            }}
-          >
-            {/* Box 1 */}
-            <Box
-              sx={{
-                width: "100%", // Each box will take up 50% of the total width in swipeable views
-                padding: "1rem", // Consistent padding to ensure background wraps the content
-                borderRadius: "9.6rem", // Rounded shape
-                textAlign: "left", // Align text to the left
-                backgroundColor: "#f5f5f5", // Background color
-              }}
-            >
-              <Typography component="strong" sx={{ display: "block", fontWeight: "bold", fontSize: "1.2rem" }}>
-                Content for Box 1
-              </Typography>
-              <Typography sx={{ display: "block", fontSize: "1rem", mt: 0.5, color: "gray" }}>
-                This is the text inside Box 1.
-              </Typography>
-            </Box>
+                <Swiper
+                  spaceBetween={10} // Space between slides
+                  slidesPerView={2} // Number of slides visible at a time
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 1, // Single column on smaller screens
+                      spaceBetween: 10,
+                    },
+                    1024: {
+                      slidesPerView: 2, // Two slides visible on larger screens
+                      spaceBetween: 20,
+                    },
+                  }}
+                  style={{
+                    width: "100%", // Full width of the container
+                    display: "flex", // Use flex for arranging items
+                  }}
+                >
+                  {/* Box 1 */}
+                  <SwiperSlide>
+                    {/* Box 1 */}
+                    <Box
+                      sx={{
+                        width: "100%", // Each box will take up 50% of the total width in swipeable views
+                        padding: "1rem", // Consistent padding to ensure background wraps the content
+                        borderRadius: "9.6rem", // Rounded shape
+                        textAlign: "left", // Align text to the left
+                        backgroundColor: "#f5f5f5", // Background color
+                      }}
+                    >
+                      <Typography
+                        component="strong"
+                        sx={{
+                          display: "block",
+                          fontWeight: "bold",
+                          fontSize: "1.2rem",
+                        }}
+                      >
+                        Content for Box 1
+                      </Typography>
+                      <Typography
+                        sx={{
+                          display: "block",
+                          fontSize: "1rem",
+                          mt: 0.5,
+                          color: "gray",
+                        }}
+                      >
+                        This is the text inside Box 1.
+                      </Typography>
+                    </Box>
+                  </SwiperSlide>
 
-            {/* Box 2 */}
-            <Box
-              sx={{
-                width: "100%", // Each box will take up 50% of the total width in swipeable views
-                padding: "1rem", // Consistent padding to ensure background wraps the content
-                borderRadius: "9.6rem", // Rounded shape
-                textAlign: "left", // Align text to the left
-                backgroundColor: "#e0e0e0", // Background color
-              }}
-            >
-              <Typography component="strong" sx={{ display: "block", fontWeight: "bold", fontSize: "1.2rem" }}>
-                Content for Box 2
-              </Typography>
-              <Typography sx={{ display: "block", fontSize: "1rem", mt: 0.5, color: "gray" }}>
-                This is the text inside Box 2.
-              </Typography>
-            </Box>
+                  {/* Box 2 */}
+                  <SwiperSlide>
+                    <Box
+                      sx={{
+                        padding: "1rem",
+                        borderRadius: "9.6rem",
+                        textAlign: "left",
+                        backgroundColor: "#e0e0e0",
+                      }}
+                    >
+                      <Typography
+                        component="strong"
+                        sx={{
+                          display: "block",
+                          fontWeight: "bold",
+                          fontSize: "1.2rem",
+                        }}
+                      >
+                        Content for Box 2
+                      </Typography>
+                      <Typography
+                        sx={{
+                          display: "block",
+                          fontSize: "1rem",
+                          mt: 0.5,
+                          color: "gray",
+                        }}
+                      >
+                        This is the text inside Box 2.
+                      </Typography>
+                    </Box>
+                  </SwiperSlide>
 
-            {/* Box 3 */}
-            <Box
-              sx={{
-                width: "100%", // Each box will take up 50% of the total width in swipeable views
-                padding: "1rem", // Consistent padding to ensure background wraps the content
-                borderRadius: "9.6rem", // Rounded shape
-                textAlign: "left", // Align text to the left
-                backgroundColor: "#d1d1d1", // Background color
-              }}
-            >
-              <Typography component="strong" sx={{ display: "block", fontWeight: "bold", fontSize: "1.2rem" }}>
-                Content for Box 3
-              </Typography>
-              <Typography sx={{ display: "block", fontSize: "1rem", mt: 0.5, color: "gray" }}>
-                This is the text inside Box 3.
-              </Typography>
-            </Box>
-          </SwipeableViews>
-        </Box>
-      )}
-    </Box>
-
+                  {/* Box 3 */}
+                  <SwiperSlide>
+                    <Box
+                      sx={{
+                        padding: "1rem",
+                        borderRadius: "9.6rem",
+                        textAlign: "left",
+                        backgroundColor: "#d1d1d1",
+                      }}
+                    >
+                      <Typography
+                        component="strong"
+                        sx={{
+                          display: "block",
+                          fontWeight: "bold",
+                          fontSize: "1.2rem",
+                        }}
+                      >
+                        Content for Box 3
+                      </Typography>
+                      <Typography
+                        sx={{
+                          display: "block",
+                          fontSize: "1rem",
+                          mt: 0.5,
+                          color: "gray",
+                        }}
+                      >
+                        This is the text inside Box 3.
+                      </Typography>
+                    </Box>
+                  </SwiperSlide>
+                  
+                </Swiper>
+                  )}
+                
+              </Box>
               
             </Carousel>
             testing
