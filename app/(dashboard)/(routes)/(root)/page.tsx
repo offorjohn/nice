@@ -362,15 +362,13 @@ const HomePage = () => {
                 </h1>
               </div>
               {/* Tab 1 */}
+
               <AntTabs
                 sx={{ textAlign: "center" }}
                 onClick={() => handleTabClick(0)}
               >
-                
                 <Tab label="Tab 1.1" sx={{ fontWeight: 900, color: "gray" }} />
 
-
-                
                 {/* Conditional render: Show the icon only on mobile */}
                 {isMobile && (
                   <Box
@@ -442,97 +440,108 @@ const HomePage = () => {
                       <Box
                         sx={{
                           width: "100%", // Each box will take up 50% of the total width in swipeable views
-                          padding: "1rem", // Consistent padding to ensure background wraps the content
+                          mt: '7%',
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
                           borderRadius: "9.6rem", // Rounded shape
-                          textAlign: "left", // Align text to the left
                           backgroundColor: "#f5f5f5", // Background color
                         }}
                       >
                         <Typography
                           component="strong"
                           sx={{
-                            display: "block",
-                            fontWeight: "bold",
-                            fontSize: "1.2rem",
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: '4%',
+                            fontSize: "1.2rem", // Adjust font size as needed
                           }}
                         >
-                          Content for Box 1
+                          Content for
                         </Typography>
+
+                        {/* Text underneath */}
                         <Typography
                           sx={{
-                            display: "block",
-                            fontSize: "1rem",
-                            mt: 0.5,
-                            color: "gray",
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
                           }}
                         >
-                          This is the text inside Box 1.
+                          This is the text underneath.
                         </Typography>
                       </Box>
                     </SwiperSlide>
 
                     {/* Box 2 */}
                     <SwiperSlide>
-                      <Box
+                    <Box
                         sx={{
-                          padding: "1rem",
-                          borderRadius: "9.6rem",
-                          textAlign: "left",
-                          backgroundColor: "#e0e0e0",
+                          width: "100%", // Each box will take up 50% of the total width in swipeable views
+                          mt: '7%',
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
+                          borderRadius: "9.6rem", // Rounded shape
+                          backgroundColor: "#f5f5f5", // Background color
                         }}
                       >
                         <Typography
                           component="strong"
                           sx={{
-                            display: "block",
-                            fontWeight: "bold",
-                            fontSize: "1.2rem",
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: '4%',
+                            fontSize: "1.2rem", // Adjust font size as needed
                           }}
                         >
-                          Content for Box 2
+                          Content for
                         </Typography>
+
+                        {/* Text underneath */}
                         <Typography
                           sx={{
-                            display: "block",
-                            fontSize: "1rem",
-                            mt: 0.5,
-                            color: "gray",
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
                           }}
                         >
-                          This is the text inside Box 2.
+                          This is the text underneath.
                         </Typography>
                       </Box>
                     </SwiperSlide>
 
                     {/* Box 3 */}
                     <SwiperSlide>
-                      <Box
+                    <Box
                         sx={{
-                          padding: "1rem",
-                          borderRadius: "9.6rem",
-                          textAlign: "left",
-                          backgroundColor: "#d1d1d1",
+                          width: "100%", // Each box will take up 50% of the total width in swipeable views
+                          mt: '7%',
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
+                          borderRadius: "9.6rem", // Rounded shape
+                          backgroundColor: "#f5f5f5", // Background color
                         }}
                       >
                         <Typography
                           component="strong"
                           sx={{
-                            display: "block",
-                            fontWeight: "bold",
-                            fontSize: "1.2rem",
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: '4%',
+                            fontSize: "1.2rem", // Adjust font size as needed
                           }}
                         >
-                          Content for Box 3
+                          Content for
                         </Typography>
+
+                        {/* Text underneath */}
                         <Typography
                           sx={{
-                            display: "block",
-                            fontSize: "1rem",
-                            mt: 0.5,
-                            color: "gray",
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
                           }}
                         >
-                          This is the text inside Box 3.
+                          This is the text underneath.
                         </Typography>
                       </Box>
                     </SwiperSlide>
@@ -540,6 +549,9 @@ const HomePage = () => {
                 )}
               </Box>
             </Carousel>
+
+
+            
             testing
           </div>
         )}
