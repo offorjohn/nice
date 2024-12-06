@@ -9,7 +9,14 @@ import { Separator } from '@/components/ui/separator';
 import { Preview } from '@/components/preview';
 import { File } from 'lucide-react';
 
-const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
+interface PageProps {
+  params: {
+    courseId: string;
+    chapterId: string;
+  };
+}
+
+const ChapterIdPage = async ({ params }: PageProps) => {
   const { userId } = auth();
 
   if (!userId) {
