@@ -361,53 +361,297 @@ const HomePage = () => {
                   professional development.
                 </h1>
               </div>
+
               {/* Tab 1 */}
 
-              <AntTabs
-                sx={{ textAlign: "center" }}
-                onClick={() => handleTabClick(0)}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "column" }, // Layout remains vertical for both cases
+                }}
               >
-                <Tab label="Tab 1.1" sx={{ fontWeight: 900, color: "gray" }} />
+                {/* Tab Navigation */}
+                <Box
+                  sx={{
+                    bgcolor: "#fff",
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" }, // Column on mobile, row on larger screens
+                    flexWrap: "wrap", // Ensures wrapping on smaller screens
+                    gap: 2, // Adds spacing between elements
+                  }}
+                >
+                  <AntTabs
+                    sx={{ textAlign: "center" }}
+                    onClick={() => handleTabClick(0)}
+                  >
+                    <Tab
+                      label="Tab 1.1"
+                      sx={{ fontWeight: 900, color: "gray" }}
+                    />
 
-                {/* Conditional render: Show the icon only on mobile */}
-                {isMobile && (
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      right: 0,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      paddingRight: 2,
+                    {/* Conditional render: Show the icon only on mobile */}
+                    {isMobile && (
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          right: 0,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          paddingRight: 2,
+                        }}
+                      >
+                        <SvgIcon sx={{ fontSize: 24 }}>
+                          <defs>
+                            <linearGradient
+                              id="gradient1"
+                              x1="0%"
+                              y1="0%"
+                              x2="100%"
+                              y2="0%"
+                            >
+                              <stop
+                                offset="0%"
+                                style={{ stopColor: "#a855f7", stopOpacity: 1 }}
+                              />
+                              <stop
+                                offset="50%"
+                                style={{ stopColor: "#ec4899", stopOpacity: 1 }}
+                              />
+                              <stop
+                                offset="100%"
+                                style={{ stopColor: "#f43f5e", stopOpacity: 1 }}
+                              />
+                            </linearGradient>
+                          </defs>
+                          <path d="M7 10l5 5 5-5z" fill="url(#gradient1)" />
+                        </SvgIcon>
+                      </Box>
+                    )}
+                  </AntTabs>
+                  
+              <Box
+                sx={{
+                  width: "100%", // Full width of the container
+                  overflow: "hidden", // Ensure content doesn't overflow
+                  display: {
+                    xs: "block", // Visible on smaller screens
+                    sm: "none", // Visible on smaller and medium screens
+                    md: "none", // Hidden on larger screens
+                  },
+                }}
+              >
+                {/* Conditionally render content */}
+                {value === 0 && isTabOpen && (
+                  <Swiper
+                    spaceBetween={10} // Space between slides
+                    slidesPerView={2} // Number of slides visible at a time
+                    breakpoints={{
+                      640: {
+                        slidesPerView: 1, // Single column on smaller screens
+                        spaceBetween: 10,
+                      },
+                      1024: {
+                        slidesPerView: 2, // Two slides visible on larger screens
+                        spaceBetween: 10,
+                      },
+                    }}
+                    style={{
+                      width: "100%", // Full width of the container
+                      display: "flex", // Use flex for arranging items
                     }}
                   >
-                    <SvgIcon sx={{ fontSize: 24 }}>
-                      <defs>
-                        <linearGradient
-                          id="gradient1"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
+                    {/* Box 1 */}
+                    <SwiperSlide>
+                      {/* Box 1 */}
+                      <Box
+                        sx={{
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
+                          borderRadius: "9.6rem", // Rounded shape
+                          display: {
+                            xs: "block", // Visible on smaller screens
+                            sm: "none", // Visible on smaller and medium screens
+                            md: "none", // Hidden on larger screens
+                          },
+                          backgroundColor: "#f5f5f5", // Background color
+                        }}
+                      >
+                        <Typography
+                          component="strong"
+                          sx={{
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: {
+                              xs: "4%", // Margin-top for smaller screens
+                              sm: "1%", // Slightly smaller margin-top for larger screens
+                            },
+                            fontSize: "1.2rem", // Adjust font size as needed
+                          }}
                         >
-                          <stop
-                            offset="0%"
-                            style={{ stopColor: "#a855f7", stopOpacity: 1 }}
-                          />
-                          <stop
-                            offset="50%"
-                            style={{ stopColor: "#ec4899", stopOpacity: 1 }}
-                          />
-                          <stop
-                            offset="100%"
-                            style={{ stopColor: "#f43f5e", stopOpacity: 1 }}
-                          />
-                        </linearGradient>
-                      </defs>
-                      <path d="M7 10l5 5 5-5z" fill="url(#gradient1)" />
-                    </SvgIcon>
-                  </Box>
+                          Content for
+                        </Typography>
+
+                        {/* Text underneath */}
+                        <Typography
+                          sx={{
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
+                          }}
+                        >
+                          This is the text underneath.
+                        </Typography>
+                      </Box>
+                    </SwiperSlide>
+
+                    {/* Box 2 */}
+                    <SwiperSlide>
+                      <Box
+                        sx={{
+                          
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
+                          borderRadius: "9.6rem", // Rounded shape
+                          backgroundColor: "#f5f5f5", // Background color
+                        }}
+                      >
+                        <Typography
+                          component="strong"
+                          sx={{
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: {
+                              xs: "4%", // Margin-top for smaller screens
+                              sm: "1%", // Slightly smaller margin-top for larger screens
+                            },
+                            fontSize: "1.2rem", // Adjust font size as needed
+                          }}
+                        >
+                          Content for
+                        </Typography>
+
+                        {/* Text underneath */}
+                        <Typography
+                          sx={{
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
+                          }}
+                        >
+                          This is the text underneath.
+                        </Typography>
+                      </Box>
+                    </SwiperSlide>
+
+                    {/* Box 3 */}
+                    <SwiperSlide>
+                      <Box
+                        sx={{
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
+                          borderRadius: "9.6rem", // Rounded shape
+                          backgroundColor: "#f5f5f5", // Background color
+                        }}
+                      >
+                        <Typography
+                          component="strong"
+                          sx={{
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: "4%",
+                            fontSize: "1.2rem", // Adjust font size as needed
+                          }}
+                        >
+                          Content for
+                        </Typography>
+
+                        {/* Text underneath */}
+                        <Typography
+                          sx={{
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
+                          }}
+                        >
+                          This is the text underneath.
+                        </Typography>
+                      </Box>
+                    </SwiperSlide>
+                  </Swiper>
                 )}
-              </AntTabs>
+              </Box>
+
+                  <AntTabs
+                    sx={{ textAlign: "center" }}
+                    onClick={() => handleTabClick(1)}
+                  >
+                    <Tab
+                      label="Tab 2.1"
+                      sx={{ fontWeight: 900, color: "gray" }}
+                    />
+
+                    {/* Conditional render: Show the icon only on mobile */}
+                    {isMobile && (
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          right: 0,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          paddingRight: 2,
+                        }}
+                      >
+                        <SvgIcon sx={{ fontSize: 24 }}>
+                          <defs>
+                            <linearGradient
+                              id="gradient1"
+                              x1="0%"
+                              y1="0%"
+                              x2="100%"
+                              y2="0%"
+                            >
+                              <stop
+                                offset="0%"
+                                style={{ stopColor: "#a855f7", stopOpacity: 1 }}
+                              />
+                              <stop
+                                offset="50%"
+                                style={{ stopColor: "#ec4899", stopOpacity: 1 }}
+                              />
+                              <stop
+                                offset="100%"
+                                style={{ stopColor: "#f43f5e", stopOpacity: 1 }}
+                              />
+                            </linearGradient>
+                          </defs>
+                          <path d="M7 10l5 5 5-5z" fill="url(#gradient1)" />
+                        </SvgIcon>
+                      </Box>
+                    )}
+                  </AntTabs>
+                </Box>
+
+              </Box>
+
               <Box
                 sx={{
                   width: "100%", // Full width of the container
@@ -416,6 +660,129 @@ const HomePage = () => {
               >
                 {/* Conditionally render content */}
                 {value === 0 && isTabOpen && (
+                  <Swiper
+                    spaceBetween={10} // Space between slides
+                    slidesPerView={2} // Number of slides visible at a time
+                    breakpoints={{
+                      640: {
+                        slidesPerView: 1, // Single column on smaller screens
+                        spaceBetween: 10,
+                      },
+                      1024: {
+                        slidesPerView: 2, // Two slides visible on larger screens
+                        spaceBetween: 10,
+                      },
+                    }}
+                    style={{
+                      width: "100%", // Full width of the container
+                      display: "flex", // Use flex for arranging items
+                    }}
+                  >
+                    {/* Box 1 */}
+                    <SwiperSlide>
+                      {/* Box 1 */}
+                     
+                    </SwiperSlide>
+
+                    {/* Box 2 */}
+                    <SwiperSlide>
+                      <Box
+                        sx={{
+                          
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
+                          borderRadius: "9.6rem", // Rounded shape
+                          backgroundColor: "#f5f5f5", // Background color
+                        }}
+                      >
+                        <Typography
+                          component="strong"
+                          sx={{
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: {
+                              xs: "4%", // Margin-top for smaller screens
+                              sm: "1%", // Slightly smaller margin-top for larger screens
+                            },
+                            fontSize: "1.2rem", // Adjust font size as needed
+                          }}
+                        >
+                          Content for
+                        </Typography>
+
+                        {/* Text underneath */}
+                        <Typography
+                          sx={{
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
+                          }}
+                        >
+                          This is the text underneath.
+                        </Typography>
+                      </Box>
+                    </SwiperSlide>
+
+                    {/* Box 3 */}
+                    <SwiperSlide>
+                      <Box
+                        sx={{
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
+                          padding: "0.5rem", // Consistent padding to ensure background wraps the content
+                          borderRadius: "9.6rem", // Rounded shape
+                          backgroundColor: "#f5f5f5", // Background color
+                        }}
+                      >
+                        <Typography
+                          component="strong"
+                          sx={{
+                            display: "block", // Ensure it is on its own line
+                            fontWeight: "bold", // Bold text
+                            mt: "4%",
+                            fontSize: "1.2rem", // Adjust font size as needed
+                          }}
+                        >
+                          Content for
+                        </Typography>
+
+                        {/* Text underneath */}
+                        <Typography
+                          sx={{
+                            display: "block", // Place this text on a new line
+                            fontSize: "1rem", // Adjust font size for the text
+                            mt: 0.5, // Add a small gap between "Content for" and this text
+                            color: "gray", // Optional: text color
+                          }}
+                        >
+                          This is the text underneath.
+                        </Typography>
+                      </Box>
+                    </SwiperSlide>
+                  </Swiper>
+                )}
+              </Box>
+
+              {/* Tab 2 */}
+
+              <Box
+                sx={{
+                  width: "100%", // Full width of the container
+                  overflow: "hidden", // Ensure content doesn't overflow
+                }}
+              >
+                {/* Conditionally render content */}
+                {value === 1 && isTabOpen && (
                   <Swiper
                     spaceBetween={10} // Space between slides
                     slidesPerView={2} // Number of slides visible at a time
@@ -439,8 +806,12 @@ const HomePage = () => {
                       {/* Box 1 */}
                       <Box
                         sx={{
-                          width: "100%", // Each box will take up 50% of the total width in swipeable views
-                          mt: '7%',
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
                           padding: "0.5rem", // Consistent padding to ensure background wraps the content
                           borderRadius: "9.6rem", // Rounded shape
                           backgroundColor: "#f5f5f5", // Background color
@@ -451,11 +822,11 @@ const HomePage = () => {
                           sx={{
                             display: "block", // Ensure it is on its own line
                             fontWeight: "bold", // Bold text
-                            mt: '4%',
+                            mt: "4%",
                             fontSize: "1.2rem", // Adjust font size as needed
                           }}
                         >
-                          Content for
+                          Content
                         </Typography>
 
                         {/* Text underneath */}
@@ -467,17 +838,21 @@ const HomePage = () => {
                             color: "gray", // Optional: text color
                           }}
                         >
-                          This is the text underneath.
+                          This is the
                         </Typography>
                       </Box>
                     </SwiperSlide>
 
                     {/* Box 2 */}
                     <SwiperSlide>
-                    <Box
+                      <Box
                         sx={{
-                          width: "100%", // Each box will take up 50% of the total width in swipeable views
-                          mt: '7%',
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
                           padding: "0.5rem", // Consistent padding to ensure background wraps the content
                           borderRadius: "9.6rem", // Rounded shape
                           backgroundColor: "#f5f5f5", // Background color
@@ -488,7 +863,7 @@ const HomePage = () => {
                           sx={{
                             display: "block", // Ensure it is on its own line
                             fontWeight: "bold", // Bold text
-                            mt: '4%',
+                            mt: "4%",
                             fontSize: "1.2rem", // Adjust font size as needed
                           }}
                         >
@@ -511,10 +886,14 @@ const HomePage = () => {
 
                     {/* Box 3 */}
                     <SwiperSlide>
-                    <Box
+                      <Box
                         sx={{
-                          width: "100%", // Each box will take up 50% of the total width in swipeable views
-                          mt: '7%',
+                          width: {
+                          xs: "100%", // Full width for smaller screens
+                          sm: "80%", // Reduced width for larger screens
+                          md: "50%", // Even smaller width for medium and larger screens
+                        },
+                          mt: "7%",
                           padding: "0.5rem", // Consistent padding to ensure background wraps the content
                           borderRadius: "9.6rem", // Rounded shape
                           backgroundColor: "#f5f5f5", // Background color
@@ -525,7 +904,7 @@ const HomePage = () => {
                           sx={{
                             display: "block", // Ensure it is on its own line
                             fontWeight: "bold", // Bold text
-                            mt: '4%',
+                            mt: "4%",
                             fontSize: "1.2rem", // Adjust font size as needed
                           }}
                         >
@@ -548,10 +927,9 @@ const HomePage = () => {
                   </Swiper>
                 )}
               </Box>
+
+              
             </Carousel>
-
-
-            
             testing
           </div>
         )}
