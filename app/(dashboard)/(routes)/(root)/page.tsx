@@ -879,7 +879,7 @@ const HomePage = () => {
                             color: "gray", // Optional: text color
                           }}
                         >
-                          This is the text underneath.
+                          This is the text underneath
                         </Typography>
                       </Box>
                     </SwiperSlide>
