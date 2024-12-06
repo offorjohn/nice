@@ -10,6 +10,8 @@ import { Preview } from '@/components/preview'
 import { File } from 'lucide-react'
 import { CourseProgressButton } from './_components/CourseProgressButton'
 
+
+
 const ChapterIdPage = async({params}:{params:{courseId:string,chapterId:string}}) => {
 
     const { userId } = auth()
