@@ -9,26 +9,38 @@ import { Separator } from '@/components/ui/separator';
 import { Preview } from '@/components/preview';
 import { File } from 'lucide-react';
 
-interface PageProps {
-  params: {
-    courseId: string;
-    chapterId: string;
-  };
+// Define types for Params and SearchParams
+export type Params = Promise<{ courseId: string; chapterId: string }>;
+export type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+// Metadata generation example (if needed)
+export async function generateMetadata(props: { params: Params; searchParams: SearchParams }) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  // Utilize params and searchParams for metadata generation if required.
 }
 
-const ChapterIdPage = async (props: Awaited<PageProps>) => {
-  const params = await props.params;
-  const { userId } = auth();
+interface PageProps {
+  params: Params;
+  searchParams: SearchParams;
+}
 
+const ChapterIdPage = async (props: PageProps) => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+
+  const { userId } = auth();
   if (!userId) {
     redirect('/');
     return null;
   }
 
+  const { courseId, chapterId } = params;
+
   const data = await getChapter({
     userId,
-    chapterId: params.chapterId,
-    courseId: params.courseId,
+    courseId,
+    chapterId,
   });
 
   if (!data?.chapter || !data?.course) {
@@ -52,9 +64,9 @@ const ChapterIdPage = async (props: Awaited<PageProps>) => {
 
       <div className="p-4">
         <VideoPlayer
-          chapterId={params.chapterId}
+          chapterId={chapterId}
           title={chapter.title}
-          courseId={params.courseId}
+          courseId={courseId}
           nextChapterId={nextChapter?.id}
           playbackId={muxData?.playbackId || ''}
           isLocked={isLocked}
@@ -65,8 +77,8 @@ const ChapterIdPage = async (props: Awaited<PageProps>) => {
       <div className="p-4 flex flex-col md:flex-row items-center justify-between">
         <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
         <CourseProgressButton
-          chapterId={params.chapterId}
-          courseId={params.courseId}
+          chapterId={chapterId}
+          courseId={courseId}
           nextChapterId={nextChapter?.id}
           isCompleted={!!userProgress?.isCompleted}
         />
