@@ -118,7 +118,8 @@ const HomePage = () => {
       description: "Learn how to edit videos like a pro.",
     },
     {
-      mediaSrc: "/one.png",
+      mediaSrc: "/one.png", 
+    
 
       type: "image", // Type of media (video or image)
       title: "Learn Web Development",
@@ -316,6 +317,10 @@ const HomePage = () => {
                             <div className="relative w-full md:w-4/5 lg:w-3/4 h-[200px] md:h-[300px] lg:h-[350px] mx-auto">
                               <Image
                                 src={item.mediaSrc}
+
+                                width={800} // Replace with desired width
+
+                               height={500} // Replace with desired height
                                 alt={item.title}
                                 className="w-full h-full  rounded-lg"
                               />
@@ -358,7 +363,7 @@ const HomePage = () => {
                   platform
                 </h1>
                 <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
-                  From critical skills to technical topics, We support your
+                  From critical skills to technical topics, We really support your
                   professional development.
                 </h1>
               </div>
