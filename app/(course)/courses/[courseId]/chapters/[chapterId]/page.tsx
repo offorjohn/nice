@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
-const page = (props: Props) => {
-  return (
-    <div>page</div>
-  )
-}
+// Ensure the component is properly exported as the default export.
+const Page: React.FC<Props> = (props: Props) => {
+  return <div>page</div>;
+};
+
+export default Page;
