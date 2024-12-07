@@ -166,7 +166,7 @@ const HomePage = () => {
 
       return () => clearInterval(interval);
     }
-  }, [loading, currentIndex]); // Add currentIndex as a dependency
+  }, [loading, currentIndex, carouselItems.length]); // Add currentIndex as a dependency
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);

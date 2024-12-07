@@ -16,7 +16,8 @@ interface PageProps {
   };
 }
 
-const ChapterIdPage = async ({ params }: Awaited<PageProps>) => {
+const ChapterIdPage = async (props: Awaited<PageProps>) => {
+  const params = await props.params;
   const { userId } = auth();
 
   if (!userId) {
