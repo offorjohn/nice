@@ -17,6 +17,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Icons for car
 import Typography from "@mui/material/Typography/Typography";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import Image from "next/image";
 
 const AntTabs = styled(Tabs)({
   borderBottom: "1px solid #e8e8e8",
@@ -313,7 +314,7 @@ const HomePage = () => {
                             </div>
                           ) : (
                             <div className="relative w-full md:w-4/5 lg:w-3/4 h-[200px] md:h-[300px] lg:h-[350px] mx-auto">
-                              <img
+                              <Image
                                 src={item.mediaSrc}
                                 alt={item.title}
                                 className="w-full h-full  rounded-lg"
