@@ -364,7 +364,7 @@ const HomePage = () => {
                 </h1>
                 <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text p-4 rounded-lg mt-6 mb-4 tracking-wide shadow-lg italic">
                   From critical skills to technical topics, We really support your
-                  professional developent.
+                  professional developement.
                 </h1>
               </div>
 
