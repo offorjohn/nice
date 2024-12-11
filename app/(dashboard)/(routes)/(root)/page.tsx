@@ -380,7 +380,7 @@ const HomePage = () => {
                 {/* Tab Navigation */}
                 <Box
                   sx={{
-                    bgcolor: "#fff",
+                    bgcolor: "transparent",
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" }, // Column on mobile, row on larger screens
                     flexWrap: "wrap", // Ensures wrapping on smaller screens
