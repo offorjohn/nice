@@ -20,73 +20,22 @@ import "swiper/css";
 import Image from "next/image";
 
 const AntTabs = styled(Tabs)({
-  borderBottom: "1px solid #e8e8e8",
+  position: "relative", // Ensure proper positioning for pseudo-element
+  "&::after": {
+    content: '""', // Add a pseudo-element for the gradient border
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "2px", // Thickness of the bottom border
+    background: "linear-gradient(to right, #7c3aed, #ec4899, #ef4444)", // Gradient
+  },
   "& .MuiTabs-indicator": {
-    backgroundColor: "#1890ff",
+    backgroundColor: "#1890ff", // Active indicator
   },
 });
 
-const AntTab = styled((props: StyledTabProps) => (
-  <Tab disableRipple {...props} />
-))(({ theme }) => ({
-  textTransform: "none",
-  minWidth: 0,
-  [theme.breakpoints.up("sm")]: {
-    minWidth: 0,
-  },
-  fontWeight: theme.typography.fontWeightRegular,
-  marginRight: theme.spacing(1),
-  color: "rgba(0, 0, 0, 0.85)",
-  fontFamily: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    '"Segoe UI"',
-    "Roboto",
-    '"Helvetica Neue"',
-    "Arial",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(","),
-  "&:hover": {
-    color: "#40a9ff",
-    opacity: 1,
-  },
-  "&.Mui-selected": {
-    color: "#1890ff",
-    fontWeight: theme.typography.fontWeightMedium,
-  },
-  "&.Mui-focusVisible": {
-    backgroundColor: "#d1eaff",
-  },
-}));
 
-interface StyledTabsProps {
-  children?: React.ReactNode;
-  value: number;
-  onChange: (event: React.SyntheticEvent, newValue: number) => void;
-}
-
-interface StyledTabProps {
-  label: string;
-}
-
-const StyledTab = styled((props: StyledTabProps) => (
-  <Tab disableRipple {...props} />
-))(({ theme }) => ({
-  textTransform: "none",
-  fontWeight: theme.typography.fontWeightRegular,
-  fontSize: theme.typography.pxToRem(15),
-  marginRight: theme.spacing(1),
-  color: "rgba(255, 255, 255, 0.7)",
-  "&.Mui-selected": {
-    color: "#fff",
-  },
-  "&.Mui-focusVisible": {
-    backgroundColor: "rgba(100, 95, 228, 0.32)",
-  },
-}));
 
 const HomePage = () => {
   const [loading, setLoading] = React.useState(true); // State to manage loading status
